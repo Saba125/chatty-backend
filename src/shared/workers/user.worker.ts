@@ -1,12 +1,12 @@
-import { DoneCallback, Job } from "bull";
-import Logger from "bunyan";
-import { config } from "@root/config";
-import { userService } from "@service/db/user.service";
-const log: Logger = config.createLogger("authWorker");
+import { DoneCallback, Job } from 'bull';
+import Logger from 'bunyan';
+import { config } from '@root/config';
+import { userService } from '@service/db/user.service';
+const log: Logger = config.createLogger('authWorker');
 class UserWorker {
-  async addUserToDB(job: Job, done:DoneCallback):Promise<void> {
+  async addUserToDB(job: Job, done: DoneCallback): Promise<void> {
     try {
-      const {value} = job.data;
+      const { value } = job.data;
       // add method to send data to a database
       await userService.addUserData(value);
       job.progress(100);
