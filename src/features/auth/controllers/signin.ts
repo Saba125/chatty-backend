@@ -7,8 +7,12 @@ import { loginSchema } from '@auth/schemes/signin';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
 import { authService } from '@service/db/auth.service';
 import { BadRequestError } from '@global/helpers/error-handler';
-import { IUserDocument } from '@root/features/user/interfaces/user.interface';
+import { IResetPasswordParams, IUserDocument } from '@root/features/user/interfaces/user.interface';
 import { userService } from '@service/db/user.service';
+import { emailQueue } from '@service/queues/email.queue';
+import moment from 'moment';
+import publicIP from 'ip';
+import { resetPasswordTemplate } from '@service/emails/templates/reset-password/reset-password.template';
 export class SignIn {
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
@@ -42,6 +46,18 @@ export class SignIn {
       uId: existingUser.uId,
       createdAt: existingUser.createdAt
     } as IUserDocument;
+    const templateParams: IResetPasswordParams = {
+      username: existingUser.username,
+      email: existingUser.email,
+      ipaddress: publicIP.address(),
+      date: moment().format('DD/MM/YYYY HH:mm')
+    };
+    const template: string = resetPasswordTemplate.resetPasswordConfirmationTemplate(templateParams);
+    emailQueue.addEmailJob('forgotPasswordEmail', {
+      template,
+      receiverEmail: 'noemie.koss87@ethereal.email',
+      subject: 'Password reset confirmation'
+    });
     res.status(HTTP_STATUS.OK).json({ message: 'User logged in successfully', user: userDocument, token: userJwt });
   }
 }

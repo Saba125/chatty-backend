@@ -35,4 +35,22 @@ GET {{baseUrl}}/{{urlPath}}/currentuser
 Content-Type: application/json
 Accept: application/json
 Cookie: some_cookie=value
+###### Forgot Password
+POST {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "saba123jiadzase@asdasgmail.com"
+}
+
+###### Reset Password
+POST {{baseUrl}}/{{urlPath}}/reset-password/681bbb8d1bae2767c7630932
+Content-Type: application/json
+Accept: application/json
+
+{
+  "password": "qwerty1",
+  "confirmPassword": "qwerty1"
+}
 

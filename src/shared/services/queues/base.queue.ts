@@ -3,8 +3,9 @@ import Logger from 'bunyan';
 import { ExpressAdapter, createBullBoard, BullAdapter } from '@bull-board/express';
 import { config } from '@root/config';
 import { IAuthJob } from '@auth/interfaces/auth.interface';
+import { IEmailJob } from '@root/features/user/interfaces/user.interface';
 
-type IBaseJobData = IAuthJob;
+type IBaseJobData = IAuthJob | IEmailJob;
 
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;

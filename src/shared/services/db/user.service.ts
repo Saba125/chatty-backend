@@ -1,4 +1,3 @@
-import { IAuthDocument } from '@auth/interfaces/auth.interface';
 import { IUserDocument } from '@root/features/user/interfaces/user.interface';
 import { UserModel } from '@root/features/user/models/user.schema';
 import mongoose from 'mongoose';
