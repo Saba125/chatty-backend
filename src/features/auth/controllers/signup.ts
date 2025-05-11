@@ -44,7 +44,6 @@ export class SignUp {
     const userDataForCache: IUserDocument = SignUp.prototype.userData(authData, userObjectId);
     userDataForCache.profilePicture = `https://res.cloudinary.com/dobivcvi5/image/upload/v${result.version}/${userObjectId}`;
     // add to redis cache
-    console.log(userDataForCache);
     await userCache.saveUserToCache(`${userObjectId}`, uId, userDataForCache);
     omit(userDataForCache, ['uId', 'username', 'email', 'avatarColor', 'password']);
     console.log(userDataForCache);

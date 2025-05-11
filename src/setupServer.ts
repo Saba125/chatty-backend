@@ -15,6 +15,7 @@ import Logger from 'bunyan';
 import { CustomError } from '@global/helpers/error-handler';
 import { createAdapter } from '@socket.io/redis-adapter';
 import applicationRoutes from '@root/routes';
+import { SocketIoHandler } from '@socket/post';
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
 export class ChattyServer {
@@ -106,6 +107,7 @@ export class ChattyServer {
   }
 
   private socketIOConnections(io: Server): void {
-    log.info('socketIOConnections');
+    const postSocketHandler: SocketIoHandler = new SocketIoHandler(io);
+    postSocketHandler.listen();
   }
 }
