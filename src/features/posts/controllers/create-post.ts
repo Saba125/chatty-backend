@@ -9,6 +9,8 @@ import { socketIOPostObject } from '@socket/post';
 import { postQueue } from '@service/queues/post.queue';
 import { UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
 import { uploads } from '@global/helpers/cloudinary-upload';
+import mongoose from 'mongoose';
+
 import { BadRequestError } from '@global/helpers/error-handler';
 const postCache: PostCache = new PostCache();
 export class Create {
@@ -16,9 +18,10 @@ export class Create {
   public async post(req: Request, res: Response): Promise<void> {
     const { post, bgColor, privacy, gifUrl, profilePicture, feelings } = req.body;
     const postObjectId = new Types.ObjectId();
+    console.log(req.currentUser);
     const createdPost: IPostDocument = {
       _id: postObjectId,
-      userId: req.currentUser?.uId,
+      userId: new mongoose.Types.ObjectId(req.currentUser?.userId),
       username: req.currentUser?.username,
       email: req.currentUser?.email,
       avatarColor: req.currentUser?.avatarColor,

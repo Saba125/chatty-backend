@@ -10,7 +10,7 @@ Accept: application/json
 Cookie: some_cookie=value
 
 {
-    "post": "This is my fourth post",
+    "post": "This is my first post",
     "bgColor": "white",
     "privacy": "",
     "gifUrl": "",

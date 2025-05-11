@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, mongo } from 'mongoose';
 
 export interface IReactions {
   like: number;
@@ -12,7 +12,7 @@ export interface IReactions {
 
 export interface IPostDocument extends Document {
   _id: string | mongoose.Types.ObjectId;
-  userId: string;
+  userId: string | mongoose.Types.ObjectId;
   username: string;
   email: string;
   avatarColor: string;

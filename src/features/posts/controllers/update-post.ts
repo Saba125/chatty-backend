@@ -15,7 +15,7 @@ export class Update {
   public async post(req: Request, res: Response) {
     const { post, bgColor, feelings, privacy, gifUrl, imgVersion, imgId, profilePicture } = req.body;
     socketIOPostObject.emit('update post', req.params.postId);
-    const updatedPost: IPostDocument = {
+    const updatedPost: any = {
       post,
       bgColor,
       privacy,
@@ -33,7 +33,7 @@ export class Update {
   public async postWithImage(req: Request, res: Response) {
     const { imgId, imgVersion } = req.body;
     if (imgId && imgVersion) {
-      Update.prototype.updatePostWithImage(req);
+      Update.prototype.updatePostWithImage(req, res);
     } else {
       const result: UploadApiResponse | UploadApiErrorResponse | undefined = await Update.prototype.addImageToExistingPost(req);
       if (!result?.public_id) {
@@ -45,7 +45,7 @@ export class Update {
   private async updatePostWithImage(req: Request, res: Response): Promise<void> {
     const { post, bgColor, feelings, privacy, gifUrl, imgVersion, imgId, profilePicture } = req.body;
     socketIOPostObject.emit('update post', req.params.postId);
-    const updatedPost: IPostDocument = {
+    const updatedPost: any = {
       post,
       bgColor,
       privacy,
@@ -57,7 +57,7 @@ export class Update {
     };
     const postUpdated = await postCache.updatePostInCache(req.params.postId, updatedPost);
     postQueue.addPostJob('updatePostFromDB', { key: req.params.postId, value: postUpdated });
-    res.status(HTTP_STATUS.OK).json({ message: 'Post updated' });
+    res.status(HTTP_STATUS.OK).json({ message: 'Post with img updated' });
   }
   private async addImageToExistingPost(req: Request): Promise<UploadApiResponse | UploadApiErrorResponse | undefined> {
     const { post, bgColor, feelings, privacy, gifUrl, profilePicture, image } = req.body;
@@ -66,7 +66,7 @@ export class Update {
       return result;
     }
     socketIOPostObject.emit('update post', req.params.postId);
-    const updatedPost: IPostDocument = {
+    const updatedPost: any = {
       post,
       bgColor,
       privacy,

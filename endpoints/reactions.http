@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:5000
+
+@urlPath = api/v1
+
+###### Add reaction
+
+POST {{baseUrl}}/{{urlPath}}/post/reactions
+Content-Type: application/json
+Accept: application/json
+Cookie: some_cookie=value
+
+{
+    "userTo": "68190f4ce124681579c5f540",
+    "postId": "682091da946f2ca1be4bb373",
+    "type": "happy",
+    "previousReaction": "",
+    "postReactions": {"like":0,"love":1,"happy":0,"sad":0,"wow":0,"angry":0},
+    "profilePicture": "happy"
+}
+###### Delete reaction
+
+DELETE  {{baseUrl}}/{{urlPath}}/post/reaction/682091da946f2ca1be4bb373/sad/{"like": 0, "love": 0, "happy": 0, "sad": 0, "wow": 0, "angry": 0}
+Content-Type: application/json
+Accept: application/json
+Cookie: some_cookie=value
+
+{
+    "userTo": "68190f4ce124681579c5f540",
+    "postId": "682091da946f2ca1be4bb373",
+    "type": "happy",
+    "previousReaction": "",
+    "postReactions": {"like":0,"love":1,"happy":0,"sad":0,"wow":0,"angry":0},
+    "profilePicture": "happy"
+}
+
+#### Get post reactions
+
+GET   {{baseUrl}}/{{urlPath}}/post/reactions/682091da946f2ca1be4bb373
+Content-Type: application/json
+Accept: application/json
+Cookie: some_cookie=value
+
