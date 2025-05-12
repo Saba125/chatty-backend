@@ -30,6 +30,7 @@
       }
     ],
     "paths": {
+      "@comment/*": ["src/features/comments/*"],
       "@auth/*": ["src/features/auth/*"],
       "@post/*": ["src/features/post/*"],
       "@global/*": ["src/shared/globals/*"],
