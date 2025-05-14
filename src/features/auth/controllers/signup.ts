@@ -45,10 +45,10 @@ export class SignUp {
     userDataForCache.profilePicture = `https://res.cloudinary.com/dobivcvi5/image/upload/v${result.version}/${userObjectId}`;
     // add to redis cache
     await userCache.saveUserToCache(`${userObjectId}`, uId, userDataForCache);
-    omit(userDataForCache, ['uId', 'username', 'email', 'avatarColor', 'password']);
+    const userResult = omit(userDataForCache, ['uId', 'username', 'email', 'avatarColor', 'password']);
     console.log(userDataForCache);
     authQueue.addAuthUserJob('addAuthUserToDB', { value: authData });
-    userQueue.addUserToJob('addUserToDB', { value: userDataForCache });
+    userQueue.addUserToJob('addUserToDB', { value: userResult });
     const userJwt: string = SignUp.prototype.signupToken(authData, userObjectId);
     req.session = { jwt: userJwt };
 

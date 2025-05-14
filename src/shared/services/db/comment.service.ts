@@ -25,7 +25,7 @@ class CommentService {
     const comments: ICommentDocument[] = await CommentsModel.aggregate([{ $match: query }, { $sort: sort }]);
     return comments;
   }
-  public async getPostCommentNames(query: IQueryComment, sort: Record<string, 1 | -1>): Promise<ICommentDocument[]> {
+  public async getPostCommentNames(query: IQueryComment, sort: Record<string, 1 | -1>): Promise<ICommentNameList[]> {
     const comments: ICommentNameList[] = await CommentsModel.aggregate([
       { $match: query },
       { $sort: sort },

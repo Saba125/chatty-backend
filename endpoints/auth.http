@@ -7,7 +7,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "sabaia",
+  "username": "saba",
   "password": "sabasu",
   "email": "saba123jiadzase@asdasgmail.com",
   "avatarColor": "red",

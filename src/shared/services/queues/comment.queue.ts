@@ -1,7 +1,7 @@
 import { IPostJobData } from '@root/features/posts/interfaces/post.interface';
 import { BaseQueue } from './base.queue';
-import { postWorker } from '@worker/post.worker';
-import { commentWorker } from '@worker/comment.worker';
+import { postWorker } from '@root/shared/workers/post.worker';
+import { commentWorker } from '@root/shared/workers/comment.worker';
 import { ICommentJob } from '@comment/interfaces/comment.interface';
 
 class CommentQueue extends BaseQueue {

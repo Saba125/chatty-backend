@@ -30,6 +30,7 @@
       }
     ],
     "paths": {
+      "@follower/*": ["src/features/followers/*"],
       "@comment/*": ["src/features/comments/*"],
       "@auth/*": ["src/features/auth/*"],
       "@post/*": ["src/features/post/*"],

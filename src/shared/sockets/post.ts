@@ -2,7 +2,7 @@ import { ICommentDocument } from '@comment/interfaces/comment.interface';
 import { IReactionDocument } from '@root/features/reactions/interfaces/reactions.interface';
 import { Server, Socket } from 'socket.io';
 export let socketIOPostObject: Server;
-export class SocketIoHandler {
+export class SocketIoPostHandler {
   private io: Server;
   constructor(io: Server) {
     this.io = io;

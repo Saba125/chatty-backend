@@ -1,6 +1,6 @@
 import { BaseQueue } from './base.queue';
 import { IReactionJob } from '@root/features/reactions/interfaces/reactions.interface';
-import { reactionsWorker } from '@worker/reactions.worker';
+import { reactionsWorker } from '@root/shared/workers/reactions.worker';
 
 class ReactionsQueue extends BaseQueue {
   constructor() {

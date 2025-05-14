@@ -7,8 +7,9 @@ import { IEmailJob } from '@root/features/user/interfaces/user.interface';
 import { IPostJobData } from '@root/features/posts/interfaces/post.interface';
 import { IReactionJob } from '@root/features/reactions/interfaces/reactions.interface';
 import { ICommentJob } from '@comment/interfaces/comment.interface';
+import { IBlockedUserJobData, IFollowerJobData } from '@follower/interfaces/followers.interface';
 
-type IBaseJobData = IAuthJob | IEmailJob | IPostJobData | IReactionJob | ICommentJob;
+type IBaseJobData = IAuthJob | IEmailJob | IPostJobData | IReactionJob | ICommentJob | IFollowerJobData | IBlockedUserJobData;
 
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;
