@@ -11,9 +11,14 @@ import { config } from './config';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import Logger from 'bunyan';
+
+import { CustomError } from '@global/helpers/error-handler';
 import { createAdapter } from '@socket.io/redis-adapter';
-import applicationRoutes from './routes';
-import { CustomError, IErrorResponse } from './shared/globals/helpers/error-handler';
+import applicationRoutes from '@root/routes';
+import { SocketIoPostHandler, socketIOPostObject } from '@socket/post';
+import { SocketIoFollowerHandler, socketIOFollowerObject } from '@socket/follower';
+import { SocketIoUserHandler } from '@socket/user';
+
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
 export class ChattyServer {
@@ -104,5 +109,13 @@ export class ChattyServer {
     });
   }
 
-  private socketIOConnections(io: Server): void {}
+  private socketIOConnections(io: Server): void {
+    const postSocketHandler: SocketIoPostHandler = new SocketIoPostHandler(io);
+    const followerSocketHandler: SocketIoFollowerHandler = new SocketIoFollowerHandler(io);
+    const userSocketHandler: SocketIoUserHandler = new SocketIoUserHandler(io);
+
+    postSocketHandler.listen();
+    followerSocketHandler.listen();
+    userSocketHandler.listen();
+  }
 }

@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:5000
+
+@urlPath = api/v1
+###### Add comment
+
+POST {{baseUrl}}/{{urlPath}}/post/comment
+Content-Type: application/json
+Accept: application/json
+Cookie: some_cookie=value
+
+{
+"userTo":"681a2f8aa1d26dcac1fd9965",
+"postId": "682091da946f2ca1be4bb373",
+"comment": "my first comment",
+"profilePicture": ""
+}
+
+###### Get comment
+
+GET {{baseUrl}}/{{urlPath}}/post/comments/682091da946f2ca1be4bb373
+Content-Type: application/json
+Accept: application/json
+Cookie: some_cookie=value
